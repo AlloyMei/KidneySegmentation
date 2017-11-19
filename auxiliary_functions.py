@@ -18,34 +18,45 @@ def show_slices(slices):
         
 #==============================================================================
 
-def slicer(img, index0=14, title="Merged kindey mask"):  
+def slicer(img, index0=None, slideaxis=2, title="Merged kindey mask"):  
     """Slider to show a 3D image.
     Input:
         - img - the image, 3D numpy array,
-        - index0 (def. 14) - index of the initial slice to be shown (int),
+        - index0 - index of the initial slice to be shown (int),
+        - slideaxis - number of axis along which the slider operates (int, 0, 1, or 2),
         - title - plot suptitle (string)."""
         
     fig = plt.figure()
     ax = fig.add_subplot(111)
     fig.subplots_adjust(bottom=0.2)
     
-    current_slice = img[:,:,index0]
-    im=ax.imshow(current_slice.T, cmap='gray', origin="lower")
+    if not index0:
+        index0 = img.shape[slideaxis]/2
     
+    if slideaxis == 0:   current_slice = img[index0,:,:]
+    elif slideaxis == 1: current_slice = img[:,index0,:]
+    elif slideaxis == 2: current_slice = img[:,:,index0]
+    
+    im=ax.imshow(current_slice.T, cmap='gray', origin="lower")
+        
     slidercolor = 'lightgoldenrodyellow'
     slideraxes = fig.add_axes([0.2, 0.1, 0.6, 0.05], axisbg = slidercolor)
     
-    slider = Slider(slideraxes, 'Slice', 0, img.shape[2]-1, valinit=index0, valfmt='%d')
+    slider = Slider(slideraxes, 'Slice', 0, img.shape[slideaxis]-1, valinit=index0, valfmt='%d')
     
     plt.suptitle(title, fontsize=16)
     
     def update(val):
-        current_slice = img[:,:,int(slider.val)]
+        if   slideaxis == 0: current_slice = img[int(slider.val),:,:]
+        elif slideaxis == 1: current_slice = img[:,int(slider.val),:]
+        elif slideaxis == 2: current_slice = img[:,:,int(slider.val)]
+        
         im.set_array(current_slice.T)
         fig.canvas.draw()
         
     slider.on_changed(update)
     plt.show()
+    return fig
 
 
 #==============================================================================

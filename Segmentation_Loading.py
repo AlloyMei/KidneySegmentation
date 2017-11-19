@@ -10,7 +10,8 @@ plt.close('all')
 #==============================================================================
 # PATHS
 #path='Segmentation_Images'
-data_folder = 'ProjectData\\Segmentation_Images\\VOL1' #folder with the images (I think we should handle VOL1 and VOL2 separately)
+vol = 1 #1 for VOL1, or 2 for VOL2
+data_folder = 'ProjectData\\Segmentation_Images\\VOL' + str(vol) #folder with the images (I think we should handle VOL1 and VOL2 separately)
 output_folder = 'OutputData' #folder with the output images
 
 current_file_dir = os.path.dirname(os.path.abspath(getsourcefile(lambda:0))) #find current file path
@@ -45,5 +46,6 @@ aux.slicer(Merged_Segmentation)
 # Create Nifti Image object and save
 Merged_Segmentation_nifti = nib.Nifti1Image(Merged_Segmentation, Loaded_File.affine)
 os.chdir(output_path) #change the path to the output folder for saving
-nib.save(Merged_Segmentation_nifti, 'Kidney_Mask_VOL1.nii') #musisz mieæ obiekt Nifti, ¿eby zapisaæ przez nib
+outputfname = 'Kidney_Mask_VOL' + str(vol) + '.nii'
+nib.save(Merged_Segmentation_nifti, outputfname) #musisz mieæ obiekt Nifti, ¿eby zapisaæ przez nib
 # jeœli dobrze rozumiem, potrzebujemy Kindey_Mask_VOL1 do dzia³ania na obrazkach z VOL1 i drugiego pliku Kidney_Mask_VOL2 dla VOL2
