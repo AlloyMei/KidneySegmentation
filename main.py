@@ -30,7 +30,7 @@ import auxiliary_functions as aux
 #1. load the data
 
 # load the mask
-maskfname = 'Kidney_Mask_VOL' + str(vol) + '.nii'
+maskfname = 'C:\\Users\\Virneal\\Box Sync\\IFE\\7\\MedicalImaging\\MedicalImaging\\Segmentation_Images\\VOL' + str(vol) + '.nii'
 KidneyMask = nib.load(os.path.join(output_path, maskfname)).get_data()
 #KidneyMaskData = KidneyMask.get_data()
 
