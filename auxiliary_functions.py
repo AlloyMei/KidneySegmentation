@@ -18,13 +18,13 @@ def show_slices(slices):
         
 #==============================================================================
 
-def slicer(img, index0=None, slideaxis=2, title="Merged kidney mask"):
+def slicer(img, index0=None, slideaxis=2, title="Merged kindey mask"):  
     """Slider to show a 3D image.
     Input:
         - img - the image, 3D numpy array,
         - index0 - index of the initial slice to be shown (int),
         - slideaxis - number of axis along which the slider operates (int, 0, 1, or 2),
-        - title - plot subtitle (string)."""
+        - title - plot suptitle (string)."""
         
     fig = plt.figure()
     ax = fig.add_subplot(111)
@@ -33,9 +33,9 @@ def slicer(img, index0=None, slideaxis=2, title="Merged kidney mask"):
     if not index0:
         index0 = img.shape[slideaxis]/2
     
-    if slideaxis == 0:   current_slice = img[int(index0),:,:]
-    elif slideaxis == 1: current_slice = img[:,int(index0),:]
-    elif slideaxis == 2: current_slice = img[:,:,int(index0)]
+    if slideaxis == 0:   current_slice = img[index0,:,:]
+    elif slideaxis == 1: current_slice = img[:,index0,:]
+    elif slideaxis == 2: current_slice = img[:,:,index0]
     
     im=ax.imshow(current_slice.T, cmap='gray', origin="lower")
         
