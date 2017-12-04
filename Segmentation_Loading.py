@@ -11,7 +11,8 @@ plt.close('all')
 # PATHS
 #path='Segmentation_Images'
 vol = 1 #1 for VOL1, or 2 for VOL2
-data_folder ='C:\\Users\\Virneal\\Box Sync\\IFE\\7\\MedicalImaging\\MedicalImaging\\Segmentation_Images\\VOL' + str(vol) #folder with the images (I think we should handle VOL1 and VOL2 separately)
+#data_folder = 'C:\Users\Virneal\Documents\GitHub\KidneySegmentation\InputData' + str(vol) #folder with the images (I think we should handle VOL1 and VOL2 separately)
+data_folder = 'ProjectData\\Segmentation_Images\\VOL' + str(vol) #folder with the images (I think we should handle VOL1 and VOL2 separately)
 output_folder ='OutputData' #folder with the output images
 
 current_file_dir = os.path.dirname(os.path.abspath(getsourcefile(lambda:0))) #find current file path
